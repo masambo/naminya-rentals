@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Camera, Upload, MapPin, DollarSign, Home, Bed, Bath, Square, Info } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Warehouse } from "lucide-react";
 
 const propertyTypes = [
   { id: "room", label: "Room", icon: Home },
   { id: "apartment", label: "Apartment", icon: Home },
   { id: "house", label: "House", icon: Home },
+  { id: "mbashu", label: "Mbashu", icon: Warehouse },
 ];
 
 const AddListing = () => {
