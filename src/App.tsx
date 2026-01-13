@@ -8,6 +8,13 @@ import Search from "./pages/Search";
 import Agents from "./pages/Agents";
 import AddListing from "./pages/AddListing";
 import Profile from "./pages/Profile";
+import BecomeAgent from "./pages/BecomeAgent";
+import SavedProperties from "./pages/SavedProperties";
+import MyListings from "./pages/MyListings";
+import Messages from "./pages/Messages";
+import Notifications from "./pages/Notifications";
+import Settings from "./pages/Settings";
+import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +31,13 @@ const App = () => (
           <Route path="/agents" element={<Agents />} />
           <Route path="/add-listing" element={<AddListing />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/become-agent" element={<BecomeAgent />} />
+          <Route path="/saved" element={<SavedProperties />} />
+          <Route path="/my-listings" element={<MyListings />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/help" element={<Help />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

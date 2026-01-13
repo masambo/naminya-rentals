@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Home, Building2, DoorOpen, Building } from "lucide-react";
+import { Home, Building2, DoorOpen, Building, Warehouse } from "lucide-react";
 
 const categories = [
   { id: "all", label: "All", icon: Building2 },
   { id: "rooms", label: "Rooms", icon: DoorOpen },
   { id: "houses", label: "Houses", icon: Home },
   { id: "apartments", label: "Apartments", icon: Building },
+  { id: "mbashu", label: "Mbashu", icon: Warehouse },
 ];
 
 const CategoryTabs = () => {
