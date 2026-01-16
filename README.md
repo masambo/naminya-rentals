@@ -1,18 +1,10 @@
-# Welcome to your Lovable project
+# Ndunda - Namibia Rental Marketplace
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Ndunda is a rental marketplace platform for Namibia, connecting tenants with property owners and verified agents. Find rooms, apartments, and houses for rent, or list your property for free.
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+## Development Setup
 
 **Use your preferred IDE**
 
@@ -62,12 +54,20 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+This project can be deployed to any hosting platform that supports Vite/React applications:
+- Vercel
+- Netlify
+- AWS Amplify
+- GitHub Pages
+- Or any Node.js hosting service
 
-## Can I connect a custom domain to my Lovable project?
+## Features
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Property listings with detailed views
+- Agent profiles and reviews
+- Real-time messaging/chat
+- User authentication (Login/Signup)
+- Saved properties
+- Search and filtering
+- Map integration
+- Schedule property viewings

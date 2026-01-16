@@ -1,5 +1,6 @@
 import { Heart, MapPin, Bed, Bath, Square } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface PropertyCardProps {
@@ -11,11 +12,18 @@ interface PropertyCardProps {
   bedrooms: number;
   bathrooms: number;
   size: number;
-  type: "room" | "house" | "apartment";
+  type: "room" | "house" | "apartment" | "guesthouse" | "hotel" | "lodge" | "camp" | "lodges-camps" | "commercial" | "airbnb" | "mbashu";
   isNew?: boolean;
+  rentalType?: "long-term" | "short-term";
+  pricingModel?: {
+    daily?: number;
+    weekly?: number;
+    monthly?: number;
+  };
 }
 
 const PropertyCard = ({
+  id,
   title,
   location,
   price,
@@ -24,6 +32,8 @@ const PropertyCard = ({
   bathrooms,
   size,
   isNew,
+  rentalType = "long-term",
+  pricingModel,
 }: PropertyCardProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -55,39 +65,55 @@ const PropertyCard = ({
         )}
       </div>
 
-      <div className="p-4">
+      <div className="p-4 md:p-5">
         <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-semibold text-foreground line-clamp-1">{title}</h3>
+          <h3 className="text-base md:text-lg font-semibold text-foreground line-clamp-1">{title}</h3>
         </div>
 
-        <div className="flex items-center gap-1.5 text-muted-foreground text-sm mb-3">
-          <MapPin className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1.5 text-muted-foreground text-sm md:text-base mb-3">
+          <MapPin className="w-4 h-4" />
           <span className="line-clamp-1">{location}</span>
         </div>
 
-        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
           <div className="flex items-center gap-1">
-            <Bed className="w-3.5 h-3.5" />
+            <Bed className="w-4 h-4" />
             <span>{bedrooms} Bed</span>
           </div>
           <div className="flex items-center gap-1">
-            <Bath className="w-3.5 h-3.5" />
+            <Bath className="w-4 h-4" />
             <span>{bathrooms} Bath</span>
           </div>
           <div className="flex items-center gap-1">
-            <Square className="w-3.5 h-3.5" />
+            <Square className="w-4 h-4" />
             <span>{size}m²</span>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xl font-bold text-primary">N${price.toLocaleString()}</span>
-            <span className="text-sm text-muted-foreground">/month</span>
+            {rentalType === "short-term" && pricingModel?.daily ? (
+              <>
+                <span className="text-xl md:text-2xl font-bold text-primary">
+                  N${pricingModel.daily.toLocaleString()}
+                </span>
+                <span className="text-sm md:text-base text-muted-foreground">/night</span>
+              </>
+            ) : (
+              <>
+                <span className="text-xl md:text-2xl font-bold text-primary">
+                  N${price.toLocaleString()}
+                </span>
+                <span className="text-sm md:text-base text-muted-foreground">/month</span>
+              </>
+            )}
           </div>
-          <button className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors">
+          <Link
+            to={`/property/${id}`}
+            className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm md:text-base font-medium hover:bg-primary/20 transition-colors"
+          >
             View
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { ArrowLeft, Home, MapPin, Eye, Edit, Trash2, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import PropertyCard from "@/components/home/PropertyCard";
 
 import property3 from "@/assets/property-3.jpg";
 import property4 from "@/assets/property-4.jpg";
@@ -14,8 +15,13 @@ const myListings = [
     location: "Olympia, Windhoek",
     price: 25000,
     image: property3,
+    bedrooms: 4,
+    bathrooms: 2,
+    size: 180,
+    type: "house" as const,
     status: "active",
     views: 124,
+    rentalType: "long-term" as const,
   },
   {
     id: "2",
@@ -23,96 +29,93 @@ const myListings = [
     location: "Eros, Windhoek",
     price: 5500,
     image: property4,
+    bedrooms: 1,
+    bathrooms: 1,
+    size: 35,
+    type: "apartment" as const,
     status: "pending",
     views: 0,
+    rentalType: "long-term" as const,
   },
 ];
 
 const MyListings = () => {
   return (
     <AppLayout>
-      <div className="px-4 pt-4 pb-6">
-        <Link to="/profile" className="inline-flex items-center gap-2 text-muted-foreground mb-4">
+      <div className="px-4 pt-4 pb-6 md:px-0 md:pt-8 md:pb-8">
+        <Link to="/profile" className="inline-flex items-center gap-2 text-muted-foreground mb-4 md:mb-6">
           <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm">Back</span>
+          <span className="text-sm md:text-base">Back</span>
         </Link>
 
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Home className="w-6 h-6 text-primary" />
+        <div className="flex items-center justify-between mb-6 md:mb-8">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Home className="w-6 h-6 md:w-8 md:h-8 text-primary" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">My Listings</h1>
-              <p className="text-sm text-muted-foreground">{myListings.length} properties</p>
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">My Listings</h1>
+              <p className="text-sm md:text-base text-muted-foreground">{myListings.length} properties</p>
             </div>
           </div>
-          <Button variant="default" size="icon" asChild>
+          <Button variant="default" size="icon" className="md:h-12 md:w-12" asChild>
             <Link to="/add-listing">
-              <Plus className="w-5 h-5" />
+              <Plus className="w-5 h-5 md:w-6 md:h-6" />
             </Link>
           </Button>
         </div>
 
         {myListings.length === 0 ? (
-          <div className="text-center py-12">
-            <Home className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="font-semibold text-foreground mb-2">No listings yet</h3>
-            <p className="text-sm text-muted-foreground mb-4">
+          <div className="text-center py-12 md:py-16">
+            <Home className="w-12 h-12 md:w-16 md:h-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="font-semibold text-foreground mb-2 md:text-lg">No listings yet</h3>
+            <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
               List your first property for free
             </p>
-            <Button variant="default" asChild>
+            <Button variant="default" size="lg" asChild>
               <Link to="/add-listing">Add Listing</Link>
             </Button>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {myListings.map((listing) => (
-              <div
-                key={listing.id}
-                className="bg-card rounded-xl overflow-hidden shadow-card animate-fade-in"
-              >
-                <div className="flex">
-                  <div className="relative">
-                    <img
-                      src={listing.image}
-                      alt={listing.title}
-                      className="w-32 h-32 object-cover"
-                    />
-                    <span className={cn(
-                      "absolute top-2 left-2 text-xs font-semibold px-2 py-1 rounded-full",
-                      listing.status === "active" 
-                        ? "bg-primary text-primary-foreground" 
-                        : "bg-warning text-foreground"
-                    )}>
-                      {listing.status === "active" ? "Active" : "Pending"}
-                    </span>
-                  </div>
-                  <div className="flex-1 p-3">
-                    <h3 className="font-semibold text-foreground text-sm line-clamp-1">
-                      {listing.title}
-                    </h3>
-                    <div className="flex items-center gap-1 text-muted-foreground text-xs mt-1">
-                      <MapPin className="w-3 h-3" />
-                      <span className="line-clamp-1">{listing.location}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
-                      <Eye className="w-3 h-3" />
-                      <span>{listing.views} views</span>
-                    </div>
-                    <p className="text-primary font-bold text-sm mt-2">
-                      N${listing.price.toLocaleString()}/mo
-                    </p>
-                    <div className="flex gap-2 mt-3">
-                      <button className="flex-1 flex items-center justify-center gap-1 py-2 bg-secondary text-secondary-foreground rounded-lg text-xs font-medium">
-                        <Edit className="w-3 h-3" />
-                        Edit
-                      </button>
-                      <button className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
+              <div key={listing.id} className="relative">
+                <PropertyCard
+                  id={listing.id}
+                  title={listing.title}
+                  location={listing.location}
+                  price={listing.price}
+                  image={listing.image}
+                  bedrooms={listing.bedrooms}
+                  bathrooms={listing.bathrooms}
+                  size={listing.size}
+                  type={listing.type}
+                  rentalType={listing.rentalType}
+                />
+                {/* Status Badge */}
+                <div className="absolute top-3 left-3 z-10">
+                  <span className={cn(
+                    "text-xs font-semibold px-2 py-1 rounded-full",
+                    listing.status === "active" 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-warning text-foreground"
+                  )}>
+                    {listing.status === "active" ? "Active" : "Pending"}
+                  </span>
+                </div>
+                {/* Action Buttons Overlay */}
+                <div className="absolute bottom-3 right-3 z-10 flex gap-2">
+                  <button className="p-2 bg-background/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-background transition-colors">
+                    <Edit className="w-4 h-4 text-primary" />
+                  </button>
+                  <button className="p-2 bg-background/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-background transition-colors">
+                    <Trash2 className="w-4 h-4 text-destructive" />
+                  </button>
+                </div>
+                {/* Views Info */}
+                <div className="absolute top-3 right-3 z-10 flex items-center gap-1 bg-background/90 backdrop-blur-sm px-2 py-1 rounded-lg text-xs text-muted-foreground">
+                  <Eye className="w-3 h-3" />
+                  <span>{listing.views}</span>
                 </div>
               </div>
             ))}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Home, Building2, DoorOpen, Building, Warehouse } from "lucide-react";
+import { Home, Building2, DoorOpen, Building, Warehouse, Hotel, TreePine, Store } from "lucide-react";
 
 const categories = [
   { id: "all", label: "All", icon: Building2 },
@@ -8,14 +8,18 @@ const categories = [
   { id: "houses", label: "Houses", icon: Home },
   { id: "apartments", label: "Apartments", icon: Building },
   { id: "mbashu", label: "Mbashu", icon: Warehouse },
+  { id: "commercial", label: "Commercial", icon: Store },
+  // Short-term categories
+  { id: "guesthouses", label: "Guest Houses", icon: Hotel },
+  { id: "lodges-camps", label: "Lodges & Camps", icon: TreePine },
 ];
 
 const CategoryTabs = () => {
   const [active, setActive] = useState("all");
 
   return (
-    <div className="px-4 py-2">
-      <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+    <div className="px-4 py-2 md:px-0 md:py-4">
+      <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-1 md:flex-wrap md:overflow-x-visible md:justify-center">
         {categories.map((category) => {
           const Icon = category.icon;
           const isActive = active === category.id;
