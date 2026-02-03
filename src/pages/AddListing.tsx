@@ -12,7 +12,7 @@ const propertyTypes = [
   { id: "room", label: "Room", icon: Home, category: "long-term" },
   { id: "apartment", label: "Apartment", icon: Home, category: "long-term" },
   { id: "house", label: "House", icon: Home, category: "long-term" },
-  { id: "mbashu", label: "Mbashu", icon: Warehouse, category: "long-term" },
+  { id: "mbashu", label: "Ghetto/Mbashu", icon: Warehouse, category: "long-term" },
   { id: "commercial", label: "Commercial", icon: Store, category: "long-term" },
   // Short-term rentals
   { id: "guesthouse", label: "Guest House", icon: Hotel, category: "short-term" },

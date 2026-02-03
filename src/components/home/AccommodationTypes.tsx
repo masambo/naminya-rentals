@@ -10,7 +10,7 @@ const accommodationTypes = [
   { id: "hotels", label: "Hotels", icon: Building2, color: "text-red-600" },
   { id: "lodges-camps", label: "Lodges & Camps", icon: TreePine, color: "text-emerald-600" },
   { id: "commercial", label: "Commercial", icon: Store, color: "text-teal-600" },
-  { id: "mbashu", label: "Mbashu", icon: Warehouse, color: "text-indigo-600" },
+  { id: "mbashu", label: "Ghetto/Mbashu", icon: Warehouse, color: "text-indigo-600" },
 ];
 
 const AccommodationTypes = () => {

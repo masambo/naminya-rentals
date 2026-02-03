@@ -282,7 +282,7 @@ const Search = () => {
                     <SelectItem value="house">House</SelectItem>
                     <SelectItem value="apartment">Apartment</SelectItem>
                     <SelectItem value="room">Room</SelectItem>
-                    <SelectItem value="mbashu">Mbashu</SelectItem>
+                    <SelectItem value="mbashu">Ghetto/Mbashu</SelectItem>
                     <SelectItem value="guesthouse">Guest House</SelectItem>
                     <SelectItem value="hotel">Hotel</SelectItem>
                     <SelectItem value="lodges-camps">Lodges & Camps</SelectItem>

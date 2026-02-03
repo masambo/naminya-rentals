@@ -7,7 +7,7 @@ const categories = [
   { id: "rooms", label: "Rooms", icon: DoorOpen },
   { id: "houses", label: "Houses", icon: Home },
   { id: "apartments", label: "Apartments", icon: Building },
-  { id: "mbashu", label: "Mbashu", icon: Warehouse },
+  { id: "mbashu", label: "Ghetto/Mbashu", icon: Warehouse },
   { id: "commercial", label: "Commercial", icon: Store },
   // Short-term categories
   { id: "guesthouses", label: "Guest Houses", icon: Hotel },
