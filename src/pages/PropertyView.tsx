@@ -70,6 +70,8 @@ const mockProperties: Record<string, any> = {
     title: "Modern 2BR Apartment",
     location: "Kleine Kuppe, Windhoek",
     fullAddress: "123 Independence Avenue, Kleine Kuppe, Windhoek",
+    latitude: -22.5609,
+    longitude: 17.0658,
     price: 12500,
     images: [property1, property2, property3, property4],
     bedrooms: 2,
@@ -118,6 +120,8 @@ const mockProperties: Record<string, any> = {
     title: "Cozy Student Room",
     location: "Pioneerspark, Windhoek",
     fullAddress: "456 Main Street, Pioneerspark, Windhoek",
+    latitude: -22.5714,
+    longitude: 17.0836,
     price: 3500,
     images: [property2, property3, property4, property1],
     bedrooms: 1,
@@ -158,6 +162,8 @@ const mockProperties: Record<string, any> = {
     title: "Spacious Family House",
     location: "Olympia, Windhoek",
     fullAddress: "789 Hill Street, Olympia, Windhoek",
+    latitude: -22.5556,
+    longitude: 17.0722,
     price: 25000,
     images: [property3, property4, property1, property2],
     bedrooms: 4,
@@ -939,25 +945,38 @@ const PropertyView = () => {
               <p className="text-sm font-medium mb-2">Full Address</p>
               <p className="text-sm text-muted-foreground">{property.fullAddress}</p>
             </div>
-            {/* Map Integration - Using Google Maps Embed API */}
+            {/* Google Street View Integration */}
             <div className="aspect-video bg-muted rounded-lg overflow-hidden border border-border mb-4 relative">
-              <iframe
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY'}&q=${encodeURIComponent(property.fullAddress)}`}
-                title="Property Location"
-              />
+              {property.latitude && property.longitude ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps/embed/v1/streetview?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY'}&location=${property.latitude},${property.longitude}&heading=210&pitch=0&fov=90`}
+                  title="Property Street View"
+                />
+              ) : (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps/embed/v1/streetview?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY'}&location=${encodeURIComponent(property.fullAddress || property.location)}&heading=210&pitch=0&fov=90`}
+                  title="Property Street View"
+                />
+              )}
               {/* Fallback if no API key */}
               {!import.meta.env.VITE_GOOGLE_MAPS_API_KEY && (
                 <div className="absolute inset-0 flex items-center justify-center bg-muted/95 backdrop-blur-sm">
                   <div className="text-center">
                     <MapPin className="w-12 h-12 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-sm text-muted-foreground mb-2">Map view</p>
-                    <p className="text-xs text-muted-foreground">Add VITE_GOOGLE_MAPS_API_KEY to enable map</p>
+                    <p className="text-sm text-muted-foreground mb-2">Street View</p>
+                    <p className="text-xs text-muted-foreground">Add VITE_GOOGLE_MAPS_API_KEY to enable Street View</p>
                   </div>
                 </div>
               )}

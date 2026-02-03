@@ -22,7 +22,7 @@ const AccommodationTypes = () => {
 
   return (
     <div className="px-4 py-4 md:px-0 md:py-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3 md:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-3">
         {accommodationTypes.map((type) => {
           const Icon = type.icon;
           return (
@@ -30,16 +30,16 @@ const AccommodationTypes = () => {
               key={type.id}
               onClick={() => handleTypeClick(type.id)}
               className={cn(
-                "flex flex-col items-center justify-center gap-2 p-3 md:p-4 bg-card rounded-xl border-2 border-border transition-all duration-200 hover:border-primary hover:shadow-card group"
+                "flex flex-col items-center justify-center gap-1.5 p-2 md:p-2.5 bg-card rounded-lg border border-border transition-all duration-200 hover:border-primary hover:shadow-card group"
               )}
             >
               <div className={cn(
-                "w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-all duration-200 group-hover:bg-primary/20 group-hover:scale-110",
+                "w-8 h-8 md:w-9 md:h-9 rounded-lg bg-primary/10 flex items-center justify-center transition-all duration-200 group-hover:bg-primary/20 group-hover:scale-110",
                 type.color
               )}>
-                <Icon className={cn("w-5 h-5 md:w-6 md:h-6", type.color)} />
+                <Icon className={cn("w-4 h-4 md:w-4 md:h-4", type.color)} />
               </div>
-              <span className="text-sm md:text-base font-semibold text-foreground">
+              <span className="text-xs md:text-sm font-medium text-foreground">
                 {type.label}
               </span>
             </button>

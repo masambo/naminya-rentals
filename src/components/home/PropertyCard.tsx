@@ -1,6 +1,6 @@
 import { Heart, MapPin, Bed, Bath, Square } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface PropertyCardProps {
@@ -36,84 +36,89 @@ const PropertyCard = ({
   pricingModel,
 }: PropertyCardProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/property/${id}`);
+  };
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFavorite(!isFavorite);
+  };
 
   return (
-    <div className="bg-card rounded-2xl overflow-hidden shadow-card transition-all duration-300 hover:shadow-lifted animate-fade-in">
+    <div 
+      onClick={handleCardClick}
+      className="bg-card rounded-xl overflow-hidden shadow-card transition-all duration-300 hover:shadow-lifted animate-fade-in cursor-pointer"
+    >
       <div className="relative">
         <img
           src={image}
           alt={title}
-          className="w-full h-44 object-cover"
+          className="w-full h-32 md:h-36 object-cover"
         />
         <button
-          onClick={() => setIsFavorite(!isFavorite)}
+          onClick={handleFavoriteClick}
           className={cn(
-            "absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200",
+            "absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 z-10",
             isFavorite
               ? "bg-destructive text-primary-foreground"
               : "bg-card/80 backdrop-blur-sm text-foreground hover:bg-card"
           )}
         >
           <Heart
-            className={cn("w-4 h-4", isFavorite && "fill-current")}
+            className={cn("w-3.5 h-3.5", isFavorite && "fill-current")}
           />
         </button>
         {isNew && (
-          <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-1 rounded-full">
+          <span className="absolute top-2 left-2 bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
             New
           </span>
         )}
       </div>
 
-      <div className="p-4 md:p-5">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="text-base md:text-lg font-semibold text-foreground line-clamp-1">{title}</h3>
+      <div className="p-3 md:p-4">
+        <div className="flex items-start justify-between gap-2 mb-1.5">
+          <h3 className="text-sm md:text-base font-semibold text-foreground line-clamp-1">{title}</h3>
         </div>
 
-        <div className="flex items-center gap-1.5 text-muted-foreground text-sm md:text-base mb-3">
-          <MapPin className="w-4 h-4" />
+        <div className="flex items-center gap-1.5 text-muted-foreground text-xs md:text-sm mb-2">
+          <MapPin className="w-3 h-3" />
           <span className="line-clamp-1">{location}</span>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
           <div className="flex items-center gap-1">
-            <Bed className="w-4 h-4" />
+            <Bed className="w-3 h-3" />
             <span>{bedrooms} Bed</span>
           </div>
           <div className="flex items-center gap-1">
-            <Bath className="w-4 h-4" />
+            <Bath className="w-3 h-3" />
             <span>{bathrooms} Bath</span>
           </div>
           <div className="flex items-center gap-1">
-            <Square className="w-4 h-4" />
+            <Square className="w-3 h-3" />
             <span>{size}m²</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
-            {rentalType === "short-term" && pricingModel?.daily ? (
-              <>
-                <span className="text-xl md:text-2xl font-bold text-primary">
-                  N${pricingModel.daily.toLocaleString()}
-                </span>
-                <span className="text-sm md:text-base text-muted-foreground">/night</span>
-              </>
-            ) : (
-              <>
-                <span className="text-xl md:text-2xl font-bold text-primary">
-                  N${price.toLocaleString()}
-                </span>
-                <span className="text-sm md:text-base text-muted-foreground">/month</span>
-              </>
-            )}
-          </div>
-          <Link
-            to={`/property/${id}`}
-            className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm md:text-base font-medium hover:bg-primary/20 transition-colors"
-          >
-            View
-          </Link>
+        <div>
+          {rentalType === "short-term" && pricingModel?.daily ? (
+            <>
+              <span className="text-lg md:text-xl font-bold text-primary">
+                N${pricingModel.daily.toLocaleString()}
+              </span>
+              <span className="text-xs md:text-sm text-muted-foreground">/night</span>
+            </>
+          ) : (
+            <>
+              <span className="text-lg md:text-xl font-bold text-primary">
+                N${price.toLocaleString()}
+              </span>
+              <span className="text-xs md:text-sm text-muted-foreground">/month</span>
+            </>
+          )}
         </div>
       </div>
     </div>
