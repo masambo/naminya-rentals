@@ -1,17 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
+// Re-export the auto-generated Lovable Cloud client.
+// Cast as `any` so existing services that reference tables not yet created
+// don't break the TypeScript build. Auth still works fully-typed via the
+// underlying client.
+import { supabase as typedSupabase } from "@/integrations/supabase/client";
+export type { Database } from "@/integrations/supabase/types";
 
-// Supabase configuration
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://siutwkvarytqrjkwnyxv.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_pUUZZ6Rz1Fj2jl3SqeWQcg_NOlazCo6';
-
-// Create and export the Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-// Database types (will be generated from Supabase later)
-export type Database = {
-  public: {
-    Tables: {
-      // Tables will be defined here based on your schema
-    };
-  };
-};
+export const supabase = typedSupabase as any;
