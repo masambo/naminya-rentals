@@ -9,6 +9,14 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { userProfileService } from "@/services/userProfile";
+import { lovable } from "@/integrations/lovable";
+
+const handleGoogle = async () => {
+  const result = await lovable.auth.signInWithOAuth("google", {
+    redirect_uri: window.location.origin,
+  });
+  if (result.error) toast.error("Google sign-in failed");
+};
 
 const Login = () => {
   const navigate = useNavigate();
@@ -189,6 +197,14 @@ const Login = () => {
                     {isLoading ? "Signing in..." : "Sign In"}
                   </Button>
                 </form>
+
+                <div className="relative my-6">
+                  <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
+                  <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground">OR</span></div>
+                </div>
+                <Button type="button" variant="outline" className="w-full" size="lg" onClick={handleGoogle}>
+                  Continue with Google
+                </Button>
 
                 <div className="mt-6 text-center">
                   <p className="text-sm text-muted-foreground">
